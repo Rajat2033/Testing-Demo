@@ -1,0 +1,125 @@
+<div class="container">
+    <div class="card">
+        <div class="card-body p-5">
+            <h4 class="text-center" [ngStyle]="{color:'red'}">Add New Flight</h4>
+            <form #formData="ngForm" (ngSubmit)="addFlight(formData)">
+                <div class="form-outline md-5">
+                    <label class="form-label">Enter Airline Name</label>
+                    <input type="text" name="airline" class="form-control" #airline="ngModel" required ngModel
+                        placeholder="Enter airline Name" pattern="[a-zA-Z]+" maxlength="10" minlength="4">
+                    <span style="color:red" *ngIf="airline.touched && airline.invalid">Enter Airline details
+                        properly</span>
+                </div>
+
+                <div>
+                    <label class="form-label">Enter Departure Airport</label>
+                    <input type="text" name="departureLocation" #departureLocation="ngModel" class="form-control"
+                        required ngModel placeholder="Enter departure location" minlength="4" maxlength="10"
+                        pattern="[a-zA-Z]+">
+                    <span style="color:red" *ngIf="departureLocation.touched && departureLocation.invalid">Enter Proper
+                        Departure
+                        Location</span>
+                </div>
+                <div>
+                    <label class="form-label">Enter Arrival Airport</label>
+                    <input type="text" name="arrivalLocation" class="form-control" #arrivalLocation="ngModel" required
+                        ngModel placeholder="enter arrival location" minlength="4" maxlength="10" pattern="[a-zA-Z]+">
+                    <span style="color:red" *ngIf="arrivalLocation.touched && arrivalLocation.invalid">Enter Arrival
+                        Destination
+                        Properly</span>
+                </div>
+                <label class="form-label">Enter Flight Date</label>
+                <input type="date" name="flightDate" class="form-control" required ngModel
+                    placeholder="Enter departure date">
+
+                <div>
+                    <label class="form-label">Enter Flight Description</label>
+                    <input type="textarea" name="flightDesc" class="form-control" #desc="ngModel" minlength="10"
+                        maxlength="30" required ngModel placeholder="enter flight description">
+                    <span style="color:red" *ngIf="desc.touched && desc.invalid"> Enter proper Description <br> It
+                        should have at least 10-12 characters</span>
+
+                </div>
+
+                <div>
+                    <label class="form-label">Enter Ticket price</label>
+                    <input type="number" name="ticketPrice" class="form-control" 
+                        required ngModel placeholder="Enter flight ticket price" #ticketPrice="ngModel" min="5000" max="20000">
+                    <span style="color:red" *ngIf="ticketPrice.touched && ticketPrice.invalid">Enter price of
+                        ticket.<br>It should be between 5000 to 20000</span>
+                </div>
+                <br>
+                <button class="btn btn-primary" [disabled]="formData.invalid">Add New Flight</button>
+
+            </form>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-body p-5">
+            <h4 class="text-center" [ngStyle]="{color:'red'}">All Flights</h4>
+
+            <table class="table ">
+                <thead>
+                    <th>Sr.No</th>
+                    <th>Flight Number</th>
+                    <th>Airline Name</th>
+                    <th>Departure Location</th>
+                    <th>Arrival Location</th>
+                    <th>Departure Date</th>
+                    <th>Flight Description</th>
+                    <th>Ticket Price</th>
+                    <th>Actions</th>
+                </thead>
+                <tr *ngFor="let flight of flightList, index as i">
+                    <td>{{i+1}}</td>
+                    <td>{{flight.flightNumber}}</td>
+                    <td>{{flight.airline}}</td>
+                    <td>{{flight.departureLocation}}</td>
+                    <td>{{flight.arrivalLocation}}</td>
+                    <td>{{flight.flightDate}}</td>
+                    <td>{{flight.flightDesc}}</td>
+                    <td>{{flight.ticketPrice}}</td>
+                    <td><button class="btn btn-success" (click)="updateFlight(flight.flightNumber)">Update</button></td>
+
+                    <td><button class="btn btn-danger" (click)="deleteFlight(flight.flightNumber)">Delete</button></td>
+
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-body p-5">
+            <h4 class="text-center" [ngStyle]="{color:'red'}">Get Flight By id</h4>
+            <form #searchform="ngForm" (ngSubmit)="searchResult()">
+                <input type="number" class="form-control" name="flightNumber" [(ngModel)]="searchInput"
+                    placeholder="Enter EventId">
+                <button class="btn btn-success">Search</button>
+            </form>
+            <table class="table ">
+                <thead>
+                    <th>Sr.No</th>
+                    <th>Flight Number</th>
+                    <th>Airline Name</th>
+                    <th>Departure Location</th>
+                    <th>Arrival Location</th>
+                    <th>Departure Date</th>
+                    <th>Flight Description</th>
+                    <th>Ticket Price</th>
+
+                </thead>
+                <tr *ngIf="flightdata">
+                    <td>{{1}}</td>
+                    <td>{{flightdata.flightNumber}}</td>
+                    <td>{{flightdata.airline}}</td>
+                    <td>{{flightdata.departureLocation}}</td>
+                    <td>{{flightdata.arrivalLocation}}</td>
+                    <td>{{flightdata.flightDate}}</td>
+                    <td>{{flightdata.flightDesc}}</td>
+                    <td>{{flightdata.ticketPrice}}</td>
+
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,42 @@
+<div class="container">
+    <div class="card">
+        <div class="card-body p-5">
+            <h4 class="text-center" [ngStyle]="{color:'red'}">Flight Registration</h4>
+            <form #formData="ngForm" (ngSubmit)="updateFlight(formData)">
+                <div class="form-outline md-5">
+                    <label class="form-label">Enter Airline Name</label>
+                    <input type="text" name="airline" class="form-control" required [(ngModel)]="flight.airline"
+                        placeholder="enter airline details" readonly>
+                </div>
+
+                <label class="form-label">Enter Departure Airport</label>
+                <input type="text" name="departureLocation" class="form-control" required
+                    [(ngModel)]="flight.departureLocation" placeholder="enter departure location">
+
+                <label class="form-label">Enter Arrival Airport</label>
+                <input type="text" name="arrivalLocation" class="form-control" required
+                    [(ngModel)]="flight.arrivalLocation" placeholder="enter arrival location">
+
+                <label class="form-label">Enter Departure Date</label>
+                <input type="date" name="flightDate" class="form-control" required [(ngModel)]="flight.flightDate"
+                    placeholder="enter departure date">
+
+                <label class="form-label">Enter Flight Description</label>
+                <input type="text" name="flightDesc" class="form-control" required [(ngModel)]="flight.flightDesc"
+                    placeholder="enter flight description">
+
+                <label class="form-label">Enter Ticket price</label>
+                <input type="text" name="ticketPrice" class="form-control" required [(ngModel)]="flight.ticketPrice"
+                    placeholder="enter flight ticket price" readonly>
+
+                <button class="btn btn-primary">Update Flight</button>
+
+                <br>
+                <br>
+                <a routerLink="/">Back to Home</a>
+            </form>
+        </div>
+    </div>
+
+   
+</div>
